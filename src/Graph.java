@@ -44,7 +44,11 @@ public class Graph extends Application {
 	    }
 	 
 	    public static void main(String[] args) {
-	    	
+	    	launch(args);
+	    }
+	    
+	    
+	    public static void graphUserInputSeconds() {
 	    	ExecutorService exc = Executors.newCachedThreadPool();
 	    	exc.execute(new ClockTimer());
 	    	
@@ -52,12 +56,11 @@ public class Graph extends Application {
 	    	boolean start = false;
 	    	
 	    	do {
-	    		System.out.println("input x coordinate: ");
 
 	    		try {
-	    			values.add(s.nextInt());
 	    			System.out.println("input y coordinate: ");
 	    			values.add(s.nextInt());
+	    			values.add(clock.getSeconds());
 	    		}catch(Exception e) {
 	    			if(s.next().contains("done")) {
 	    				start = true;
@@ -70,19 +73,44 @@ public class Graph extends Application {
 	    	
 	    	for(int i = 0; i<values.size(); i+=2) {
 	    		
-	    		series1.getData().add(new XYChart.Data(values.get(i), values.get(i + 1)));
+	    		series1.getData().add(new XYChart.Data(values.get(i+1), values.get(i)));
 	    		
 	    	}
-	    	launch(args);
+	    }
+	    
+	    public static void graphUserInputMiliseconds() {
+	    	ExecutorService exc = Executors.newCachedThreadPool();
+	    	exc.execute(new ClockTimer());
+	    	
+	    	String information = "";
+	    	boolean start = false;
+	    	
+	    	do {
+
+	    		try {
+	    			System.out.println("input y coordinate: ");
+	    			values.add(s.nextInt());
+	    			values.add(clock.getMiliseconds());
+	    		}catch(Exception e) {
+	    			if(s.next().contains("done")) {
+	    				start = true;
+	    				continue;
+	    			} else
+	    			System.out.println("LOL make sure it's a friggin number");
+	    		}
+	    		
+	    	}while(!start);
+	    	
+	    	for(int i = 0; i<values.size(); i+=2) {
+	    		
+	    		series1.getData().add(new XYChart.Data(values.get(i+1), values.get(i)));
+	    		
+	    	}
+	    }
+	    
+	    public static void graphFromCSV() {
 	    	
 	    	
-//				if(rawSeconds != (int)System.currentTimeMillis()/1000%10) {
-//					realSeconds++;
-//					rawSeconds = (int)System.currentTimeMillis()/1000%10;
-//				}
-//				System.out.println(realSeconds);
-	//
-//			}
 	    	
 	    }
 
