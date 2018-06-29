@@ -1,6 +1,7 @@
 package ClientAsisstants;
 
 import java.io.File;
+import java.io.IOException;
 
 public class FileHandler {
 	
@@ -24,6 +25,28 @@ public class FileHandler {
 				System.out.println(f.getName());
 			}
 		}
+		
+	}
+	
+	public static File[] getFiles(File dir) {
+		File[] listOfFiles = dir.listFiles();
+		return listOfFiles;
+	}
+	
+	public static void execWriter() throws InterruptedException {
+		Process p;
+		
+		try {
+			p = Runtime.getRuntime().exec("New Text Document.bat");
+//			System.out.println(p.getInputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		
+		
+			
 		
 	}
 
